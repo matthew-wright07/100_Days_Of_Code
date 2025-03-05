@@ -4,11 +4,11 @@ word_list = ["arrdvark","baboon","camel"]
 random_word = random.choice(word_list)
 
 guesses = []
-lives = 5
+lives = 6
 game_over = False
 
 while not game_over:
-
+    print("_"*len(random_word))
     user_letter = input("Guess a letter\n").lower()
 
     guesses.append(user_letter)
@@ -25,8 +25,9 @@ while not game_over:
             response+="_"
     if "_" not in response:
         game_over=True
-    if not lives>0:
+    if lives==0:
         game_over=True
 
     print(response)
+    print("You have "+str(lives)+" lives left")
 print("Game Over")
