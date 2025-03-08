@@ -1,12 +1,16 @@
-class User:
-    def __init__ (self, user_id):
-        self.id = user_id
+from question_model import Question
+from data import question_data
+from quiz_brain import QuizBrain
 
-user_1 = User("1")
+question_bank = []
 
-def makeUser(user_id):
-    return {
-        id:user_id,
-        }
+for item in question_data:
+    question_bank.append(Question(item["question"], item["correct_answer"]))
 
-user2 = makeUser("2")
+quiz = QuizBrain(question_bank)
+
+while quiz.still_has_questions():
+    quiz.next_question()
+
+print("You have completed the quiz")
+print(f"Your final score was {quiz.score}/{quiz.question_number}")
