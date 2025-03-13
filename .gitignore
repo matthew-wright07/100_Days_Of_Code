@@ -1,0 +1,44 @@
+# Virtual environments
+venv/
+env/
+.virtualenv/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Dependency directories
+*.egg-info/
+dist/
+build/
+wheels/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS and Windows system files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+temp/
+
+# Environment variable files (if sensitive)
+.env
+.env.local
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
