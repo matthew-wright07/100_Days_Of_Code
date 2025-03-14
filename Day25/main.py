@@ -1,20 +1,41 @@
+import turtle
 import pandas
 
-readable = pandas.read_csv("squirrel_count.csv")
+screen = turtle.Screen()
 
-total_cinnamon = len(readable[readable["Primary Fur Color"] == "Cinnamon"])
-total_gray = len(readable[readable["Primary Fur Color"] == "Gray"])
-total_black = len(readable[readable["Primary Fur Color"] == "Black"])
+image = "blank_states_img.gif"
+screen.addshape(image)
 
-print(total_cinnamon)
-print(total_gray)
-print(total_black)
+data = pandas.read_csv("50_states.csv")
 
-data = {
-    "Fur Color" : ["Cinnamon", "Gray", "Black"],
-    "Count" : [total_cinnamon,total_gray,total_black]
+turtle.shape(image)
+
+correct = 0
+answers = []
+
+game = True
+while game:
+    answer = screen.textinput(title = f"Guess A State {correct}/50", prompt = "Guess A State").title()
+    if answer == "Exit":
+        break
+    is_in = answer in data["state"].values
+    if is_in == True and answer not in answers:
+        answers.append(answer)
+        correct+=1
+        data_in = data[data["state"] == answer]
+        new_turtle = turtle.Turtle()
+        new_turtle.hideturtle()
+        new_turtle.penup()
+        new_turtle.setx(int(data_in["x"].item()))
+        new_turtle.sety(int(data_in["y"].item()))
+        new_turtle.write(answer)
+
+not_guessed = [state for state in data["state"].values if state not in answers]
+
+data_to_csv = {
+    "not guessed":not_guessed
 }
 
-dataFrame = pandas.DataFrame(data)
+useable = pandas.DataFrame(data_to_csv)
 
-dataFrame.to_csv("squirrel_color_count.csv")
+useable.to_csv("not_guessed_states.csv")
